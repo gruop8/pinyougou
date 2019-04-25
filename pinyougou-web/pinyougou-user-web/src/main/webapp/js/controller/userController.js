@@ -1,6 +1,7 @@
 /** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
 
+
     // 定义user对象
     $scope.user = {};
     /** 用户注册 */
