@@ -151,7 +151,7 @@ app.controller('userController', function($scope, $timeout, baseService){
             if(response.data){
                 location.reload()
             }else {
-                alert("修改失败")
+                alert("修改失败。")
             }
         })
     }
