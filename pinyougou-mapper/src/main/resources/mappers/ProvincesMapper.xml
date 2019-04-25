@@ -4,5 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pinyougou.mapper.ProvincesMapper">
-
+	<select id="findById" resultType="Provinces">
+		select * from tb_provinces WHERE id = #{id};
+	</select>
 </mapper>

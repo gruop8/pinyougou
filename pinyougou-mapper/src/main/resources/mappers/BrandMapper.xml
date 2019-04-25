@@ -20,7 +20,6 @@
 			</if>
 		</where>
 	</select>
-
     <!-- 批量删除 -->
     <delete id="deleteAll">
         DELETE FROM tb_brand WHERE id IN
