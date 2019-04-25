@@ -1,6 +1,5 @@
-/** 定义控制器层 */
+﻿/** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
-
 
     // 定义user对象
     $scope.user = {};
@@ -73,6 +72,33 @@ app.controller('userController', function($scope, $timeout, baseService){
             $scope.disabled = false;
         }
 
+    };
+
+    $scope.showAddress = function () {
+        baseService.sendGet("user/showAddress?userId = " + 'itcast').then(function (response) {
+            $scope.dataList = response.data;
+        })
+    }
+
+    $scope.findProvinces = function () {
+        baseService.sendGet("user/findProvinces").then(function (response) {
+            $scope.province1 = response.data;
+        })
+    };
+
+    $scope.$watch('province',function (newValue, oldValue) {
+        if(newValue){
+            $scope.findCitiesByProvinceId(newValue);
+        }else {
+            $scope.cities1 = [];
+        }
+    })
+
+    $scope.findCitiesByProvinceId = function(parentId){
+        baseService.sendGet("/user/findCities",
+            "parentId=" + parentId).then(function(response){
+            $scope.cities1 = response.data;
+        });
     };
 
 });

@@ -34,4 +34,10 @@ public interface SellerService {
 
 	/** 商家审核 */
     void updateStatus(String sellerId, String status);
+
+    /** 查询原密码 */
+    String findOldPassword(String sellerId );
+
+    /** 修改密码 */
+    void updatePassword(String sellerId, String newPassword);
 }

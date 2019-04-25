@@ -1,27 +1,57 @@
 /** 定义控制器层 */
-app.controller('sellerController', function($scope, $controller, baseService){
+app.controller('sellerController', function($scope, $controller, baseService) {
 
     /** 指定继承baseController */
-    $controller('baseController',{$scope:$scope});
+    $controller('baseController',{$scope: $scope});
 
     /** 添加或修改 */
-    $scope.saveOrUpdate = function(){
+    $scope.saveOrUpdate = function () {
 
         /** 发送post请求 */
         baseService.sendPost("/seller/save", $scope.seller)
-            .then(function(response){
-                if (response.data){
+            .then(function (response) {
+                if (response.data) {
                     /** 跳转到登录页面 */
                     location.href = "/shoplogin.html";
-                }else{
+                } else {
                     alert("操作失败！");
                 }
             });
     };
 
+    //查询原密码
+    $scope.findOldPassword = function () {
+        baseService.sendPost("/seller/findOldPassword?oldPassword=" + $scope.oldPassword ).then(function (response) {
+            if(!response.data){
+                alert("原密码不正确");
+            }
+        });
+    };
 
+    //保存密码
+    $scope.updatePassword = function () {
+        //确认密码
+        if ($scope.confirmNewPassword && $scope.newPassword == $scope.confirmNewPassword){
+            baseService.sendPost("/seller/updatePassword?newPassword=" + $scope.newPassword).then(function (response) {
+                if(response.data){
+                    location.href = ("/shoplogin.html");
+                }else {
+                    alert("修改失败");
+                }
+            });
+        }else {
+            alert("密码不一致，请重新输入！");
+            return;
+        }
+    };
 
+    //清空
+    $scope.clear = function () {
+       $scope.oldPassword = "";
+       $scope.newPassword = "";
+       $scope.confirmNewPassword = "";
 
+    };
 
 
 
