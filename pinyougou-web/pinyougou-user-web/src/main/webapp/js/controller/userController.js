@@ -1,6 +1,12 @@
-/** 定义控制器层 */
+﻿/** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
 
+    $scope.showName = function(){
+        baseService.sendGet("/user/showName")
+            .then(function(response){
+                $scope.loginName = response.data.loginName;
+            });
+    };
     // 定义user对象
     $scope.user = {};
     /** 用户注册 */
@@ -72,6 +78,33 @@ app.controller('userController', function($scope, $timeout, baseService){
             $scope.disabled = false;
         }
 
+    };
+
+    $scope.showAddress = function () {
+        baseService.sendGet("user/showAddress?userId = " + 'itcast').then(function (response) {
+            $scope.dataList = response.data;
+        })
+    }
+
+    $scope.findProvinces = function () {
+        baseService.sendGet("user/findProvinces").then(function (response) {
+            $scope.province1 = response.data;
+        })
+    };
+    
+    $scope.$watch('province',function (newValue, oldValue) {
+        if(newValue){
+            $scope.findCitiesByProvinceId(newValue);
+        }else {
+            $scope.cities1 = [];
+        }
+    })
+
+    $scope.findCitiesByProvinceId = function(parentId){
+        baseService.sendGet("/user/findCities",
+            "parentId=" + parentId).then(function(response){
+            $scope.cities1 = response.data;
+        });
     };
 
 });
