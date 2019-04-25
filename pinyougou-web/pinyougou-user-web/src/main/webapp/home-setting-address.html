@@ -228,9 +228,24 @@ $(function(){
                                         <td>{{entity.address}}</td>
                                         <td>{{entity.mobile}}</td>
                                         <td>
-                                            <a href="#">编辑</a>
-                                            <a href="#">删除</a>
-											<a ng-if="entity.isDefault==1" href="#">默认地址</a>
+											<button type="button"
+													ng-click="update()"
+													title="删除">
+												<i class="fa fa-trash-o"></i> 编辑
+											</button>
+
+											<button type="button"
+													ng-click="delete(entity.id)"
+													title="删除">
+												<i class="fa fa-trash-o"></i> 删除
+											</button>
+
+											<button type="button"
+													ng-if="entity.isDefault==0"
+													ng-click="updateIsDefault(entity.id)"
+													title="删除">
+												<i class="fa fa-trash-o"></i> 默认地址
+											</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -258,7 +273,7 @@ $(function(){
                                                 <div data-toggle="distpicker">
                                                 <div class="form-group area">
 
-													<select ng-model="province"
+													<select ng-model="address.provinceId"
 															ng-options="i.id as i.province for i in province1.provinces"
 															class="form-control">
 														<option value="">==请选择省==</option>
@@ -266,15 +281,15 @@ $(function(){
                                                 </div>
                                                 <div class="form-group area">
 
-													<select ng-model="city"
+													<select ng-model="address.cityId"
 															ng-options="i.id as i.city for i in cities1.cities"
 															class="form-control">
 														<option value="">==请选择市==</option>
 													</select>
                                                 </div>
                                                 <div class="form-group area">
-													<select ng-model="area"
-															ng-options="i.id as i.area for i in region.areas"
+													<select ng-model="address.townId"
+															ng-options="i.id as i.area for i in areas1.areas"
 															class="form-control">
 														<option value="">==请选择区==</option>
 													</select>
@@ -309,7 +324,8 @@ $(function(){
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large">确定</button>
+                                        <button type="button" data-ok="modal"
+												ng-click="saveAddress()" class="sui-btn btn-primary btn-large">确定</button>
                                         <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
                                     </div>
                                 </div>

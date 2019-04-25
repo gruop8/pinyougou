@@ -33,4 +33,5 @@ public interface CitiesService {
 
     List<Cities> findCitiesByProvinceId(String provinceId);
 
+    Cities findByCityId(String parentId);
 }

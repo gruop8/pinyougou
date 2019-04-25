@@ -16,4 +16,7 @@ public interface CitiesMapper extends Mapper<Cities>{
 
 
     List<Cities> findCitiesByProvinceId(@Param("parentId") String parentId);
+
+
+    Cities findCityByCityId(@Param("cityid") String cityId);
 }

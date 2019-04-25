@@ -9,6 +9,7 @@ app.controller('userController', function($scope, $timeout, baseService){
     };
     // 定义user对象
     $scope.user = {};
+    $scope.address = {};
     /** 用户注册 */
     $scope.save = function () {
 
@@ -87,12 +88,13 @@ app.controller('userController', function($scope, $timeout, baseService){
     }
 
     $scope.findProvinces = function () {
+        $scope.address = {};
         baseService.sendGet("user/findProvinces").then(function (response) {
             $scope.province1 = response.data;
         })
     };
     
-    $scope.$watch('province',function (newValue, oldValue) {
+    $scope.$watch('address.provinceId',function (newValue, oldValue) {
         if(newValue){
             $scope.findCitiesByProvinceId(newValue);
         }else {
@@ -107,4 +109,50 @@ app.controller('userController', function($scope, $timeout, baseService){
         });
     };
 
+    $scope.$watch('address.cityId',function (newValue) {
+        if(newValue){
+            $scope.findAreasBiCityId(newValue);
+        }else {
+            $scope.cities1 = [];
+        }
+    })
+
+    $scope.findAreasBiCityId = function(parentId){
+        baseService.sendGet("/user/findAreas",
+            "parentId=" + parentId).then(function(response){
+            $scope.areas1 = response.data;
+        });
+    };
+
+    $scope.saveAddress = function () {
+        baseService.sendPost("user/saveAddress",$scope.address).then(function (response) {
+            if(response.data){
+                alert("添加成功");
+                location.reload()
+            }else {
+                alert("添加失败")
+            }
+        })
+    }
+
+    $scope.delete = function (id) {
+        baseService.sendPost("/user/delete?id=" + id).then(function (response) {
+            if(response.data){
+                alert("删除成功");
+                location.reload()
+            }else {
+                alert("删除失败")
+            }
+        })
+    }
+
+    $scope.updateIsDefault = function (id) {
+        baseService.sendPost("/user/updateIsDefault?id=" + id ).then(function (response) {
+            if(response.data){
+                location.reload()
+            }else {
+                alert("修改失败")
+            }
+        })
+    }
 });

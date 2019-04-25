@@ -4,5 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pinyougou.mapper.AreasMapper">
-
+	<select id="findAreaByCityId" resultType="Areas">
+		SELECT * from tb_areas where cityid = #{cityid}
+	</select>
 </mapper>

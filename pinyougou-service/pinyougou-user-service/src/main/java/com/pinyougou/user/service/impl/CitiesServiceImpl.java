@@ -62,4 +62,13 @@ public class CitiesServiceImpl implements CitiesService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Cities findByCityId(String cityId) {
+        try {
+            return citiesMapper.findCityByCityId(cityId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

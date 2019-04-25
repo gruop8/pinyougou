@@ -1,8 +1,11 @@
 package com.pinyougou.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 import com.pinyougou.pojo.Areas;
+
+import java.util.List;
 
 /**
  * AreasMapper 数据访问接口
@@ -12,5 +15,5 @@ import com.pinyougou.pojo.Areas;
 public interface AreasMapper extends Mapper<Areas>{
 
 
-
+    List<Areas> findAreaByCityId(@Param("cityid") String cityId);
 }

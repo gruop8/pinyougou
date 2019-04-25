@@ -27,7 +27,12 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void save(Address address) {
-
+        try {
+            address.setIsDefault("0");
+            addressMapper.insertSelective(address);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -37,7 +42,11 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void delete(Serializable id) {
-
+        try {
+            addressMapper.deleteByPrimaryKey(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -77,5 +86,21 @@ public class AddressServiceImpl implements AddressService {
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
+    }
+
+    @Override
+    public void updateIsDefault(Long id) {
+        try {
+            List<Address> addresses = addressMapper.selectAll();
+            for (Address address : addresses) {
+                if(address.getIsDefault().equals("1")){
+                    addressMapper.updateIsDefault();
+                }
+            }
+            addressMapper.updateIsDefaultById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

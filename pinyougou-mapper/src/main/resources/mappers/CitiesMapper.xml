@@ -7,4 +7,7 @@
 	<select id="findCitiesByProvinceId" resultType="cities">
 		select * from tb_cities where provinceid = #{parentId};
 	</select>
+	<select id="findCityByCityId" resultType="cities">
+		SELECT *from tb_cities where id = #{cityid}
+	</select>
 </mapper>
