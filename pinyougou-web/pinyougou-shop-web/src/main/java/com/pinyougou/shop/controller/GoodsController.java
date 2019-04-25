@@ -26,6 +26,7 @@ import javax.jms.Session;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
+    /*第一次修改---靳珏华*/
 
     @Reference(timeout = 10000)
     private GoodsService goodsService;
