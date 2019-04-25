@@ -8,6 +8,7 @@ import com.pinyougou.common.pojo.PageResult;
 import com.pinyougou.mapper.SellerMapper;
 import com.pinyougou.pojo.Seller;
 import com.pinyougou.service.SellerService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,6 +91,27 @@ public class SellerServiceImpl implements SellerService {
             sellerMapper.updateStatus(sellerId, status);
         }catch (Exception ex){
             throw new RuntimeException(ex);
+        }
+    }
+
+    /** 查询原密码 */
+    @Override
+    public String findOldPassword(String sellerId) {
+        try {
+            String password = sellerMapper.findOldPassword(sellerId);
+            return  password;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** 修改密码 */
+    @Override
+    public void updatePassword(String sellerId, String newPassword) {
+        try {
+            sellerMapper.updatePassword(sellerId, newPassword);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
