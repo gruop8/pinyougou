@@ -1,4 +1,4 @@
-/** 定义控制器层 */
+﻿/** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
 
     $scope.showName = function(){
@@ -93,6 +93,7 @@ app.controller('userController', function($scope, $timeout, baseService){
     };
     
     $scope.$watch('province',function (newValue, oldValue) {
+	alert("11")
         if(newValue){
             $scope.findCitiesByProvinceId(newValue);
         }else {
