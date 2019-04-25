@@ -1,12 +1,6 @@
 ﻿/** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
 
-    $scope.showName = function(){
-        baseService.sendGet("/user/showName")
-            .then(function(response){
-                $scope.loginName = response.data.loginName;
-            });
-    };
     // 定义user对象
     $scope.user = {};
     $scope.address = {};
@@ -93,8 +87,13 @@ app.controller('userController', function($scope, $timeout, baseService){
             $scope.province1 = response.data;
         })
     };
+<<<<<<< HEAD
     
     $scope.$watch('address.provinceId',function (newValue, oldValue) {
+=======
+
+    $scope.$watch('province',function (newValue, oldValue) {
+>>>>>>> dc2cb8314021448f2d3accdf04240f412c3f3d32
         if(newValue){
             $scope.findCitiesByProvinceId(newValue);
         }else {
