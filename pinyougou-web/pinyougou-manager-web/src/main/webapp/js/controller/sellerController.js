@@ -4,8 +4,9 @@ app.controller('sellerController', function($scope, $controller, baseService){
     /** 指定继承baseController */
     $controller('baseController',{$scope:$scope});
 
-    /** 查询条件对象 */
-    $scope.searchEntity = {status : '0'};
+
+    $scope.status = ['审核未通过','通过','待审核','关闭'];
+
     /** 分页查询(查询条件) */
     $scope.search = function(page, rows){
         baseService.findByPage("/seller/findByPage", page,
@@ -37,6 +38,8 @@ app.controller('sellerController', function($scope, $controller, baseService){
                 }
         });
     };
+
+
 
 
 
