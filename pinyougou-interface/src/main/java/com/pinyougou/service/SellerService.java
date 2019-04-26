@@ -40,4 +40,10 @@ public interface SellerService {
 
     /** 修改密码 */
     void updatePassword(String sellerId, String newPassword);
+
+	/** 查询商家 */
+	List<Seller> findSeller(String sellerId);
+	/**修改商家信息*/
+	void updateMessage(Seller seller);
+
 }

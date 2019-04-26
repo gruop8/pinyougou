@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 商家控制器
  *
@@ -77,4 +79,32 @@ public class SellerController {
         }
         return false;
     }
+    /**
+     * 修改商家的资料（message）
+     */
+    @GetMapping("/message")
+    public List<Seller> message(Seller seller) {
+        //获取登录用户名
+        String sellerId = SecurityContextHolder.getContext()
+                .getAuthentication().getName();
+
+        //设置用户的id
+        seller.setSellerId(sellerId);
+        //根据用户的id查询查询商家
+        return sellerService.findSeller(sellerId);
+    }
+    /**
+     * 修改商家信息
+     */
+    @PostMapping("/updatemessage")
+    public boolean updatemessage(@RequestBody Seller seller){
+        try{
+            sellerService.updateMessage(seller);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 }
