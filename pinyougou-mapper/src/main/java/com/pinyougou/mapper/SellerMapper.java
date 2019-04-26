@@ -30,4 +30,8 @@ public interface SellerMapper extends Mapper<Seller>{
     /** 修改密码 */
     @Update("update tb_seller set password = #{newPassword} where seller_id = #{sellerId}")
     void updatePassword(@Param("sellerId") String sellerId, @Param("newPassword") String newPassword);
+
+    @Select("select * from tb_seller where seller_id=#{sellerId}")
+    List<Seller> findSeller(String sellerId);
+
 }

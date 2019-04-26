@@ -114,4 +114,25 @@ public class SellerServiceImpl implements SellerService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Seller> findSeller(String sellerId) {
+        try {
+            return sellerMapper.findSeller(sellerId);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    /**修改商家信息*/
+    @Override
+    public void updateMessage(Seller seller) {
+        try{
+            //updateMessageContent
+            sellerMapper.updateByPrimaryKeySelective(seller);
+            //sellerMapper.updateMessageContent(seller);
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
 }

@@ -107,4 +107,30 @@ app.controller('sellerController', function($scope, $controller, baseService) {
             alert("请选择要删除的记录！");
         }
     };
+
+
+    //数据回显
+    $scope.show=function () {
+        /**调用服务层*/
+        baseService.sendGet("/seller/message").then(function (response) {
+            $scope.showcontent=response.data;
+        })
+    }
+
+
+    /**保存用户修改的信息*/
+    $scope.updateMessage=function () {
+        /**发送post请求*/
+        baseService.sendPost("/seller/updatemessage", $scope.showcontent[0]).then(function (response) {
+            if (response.data) {
+                alert("保存成功")
+                location.href = "/admin/seller.html"
+
+            } else {
+                alert("操作失败")
+            }
+        })
+    }
+
+
 });
