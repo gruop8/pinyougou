@@ -79,7 +79,7 @@ app.controller('userController', function($scope, $timeout, baseService){
         baseService.sendGet("user/showAddress?userId = " + 'itcast').then(function (response) {
             $scope.dataList = response.data;
         })
-    }
+    };
 
     $scope.findProvinces = function () {
         $scope.address = {};
@@ -87,19 +87,15 @@ app.controller('userController', function($scope, $timeout, baseService){
             $scope.province1 = response.data;
         })
     };
-<<<<<<< HEAD
-    
-    $scope.$watch('address.provinceId',function (newValue, oldValue) {
-=======
 
-    $scope.$watch('province',function (newValue, oldValue) {
->>>>>>> dc2cb8314021448f2d3accdf04240f412c3f3d32
+
+    $scope.$watch('address.provinceId',function (newValue, oldValue) {
         if(newValue){
             $scope.findCitiesByProvinceId(newValue);
         }else {
             $scope.cities1 = [];
         }
-    })
+    });
 
     $scope.findCitiesByProvinceId = function(parentId){
         baseService.sendGet("/user/findCities",
@@ -114,7 +110,7 @@ app.controller('userController', function($scope, $timeout, baseService){
         }else {
             $scope.cities1 = [];
         }
-    })
+    });
 
     $scope.findAreasBiCityId = function(parentId){
         baseService.sendGet("/user/findAreas",
@@ -132,7 +128,7 @@ app.controller('userController', function($scope, $timeout, baseService){
                 alert("添加失败")
             }
         })
-    }
+    };
 
     $scope.delete = function (id) {
         baseService.sendPost("/user/delete?id=" + id).then(function (response) {
@@ -143,7 +139,7 @@ app.controller('userController', function($scope, $timeout, baseService){
                 alert("删除失败")
             }
         })
-    }
+    };
 
     $scope.updateIsDefault = function (id) {
         baseService.sendPost("/user/updateIsDefault?id=" + id ).then(function (response) {
@@ -152,6 +148,6 @@ app.controller('userController', function($scope, $timeout, baseService){
             }else {
                 alert("修改失败。")
             }
-        })
+        });
     }
 });

@@ -169,4 +169,10 @@ public class UserController {
         }
         return false;
     }
+
+    /** 用户信息修改 */
+    @PostMapping("/userUpdate")
+    public boolean userUpdate(User user){
+        return false;
+    }
 }
