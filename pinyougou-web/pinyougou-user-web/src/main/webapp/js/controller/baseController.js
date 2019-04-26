@@ -5,7 +5,7 @@ app.controller('baseController', function ($scope) {
     // 定义分页指令需要的配置信息对象
     $scope.paginationConf = {
         currentPage : 1, // 当前页码
-        totalItems: 0, // 总记录数 (必须指定)
+        totalItems: 100 , // 总记录数 (必须指定)
         itemsPerPage : 10, // 页大小
         perPageOptions : [10,15,20,25,30], // 页码下拉列表框
         onChange : function () { // 页码发生改变会调用的函数
