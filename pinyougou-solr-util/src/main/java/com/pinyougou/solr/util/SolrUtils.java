@@ -85,6 +85,7 @@ public class SolrUtils {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         SolrUtils solrUtils = ac.getBean(SolrUtils.class);
         solrUtils.importDataToSolr();
+        System.out.println("1");
     }
 
 }

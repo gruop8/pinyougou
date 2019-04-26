@@ -52,10 +52,12 @@ public class AreasServiceImpl implements AreasService {
     public List<Areas> findByPage(Areas areas, int page, int rows) {
         return null;
     }
+<<<<<<< HEAD
 
     @Override
     public List<Areas> findAreasByCitiyId(String cityId) {
         return areasMapper.findAreaByCityId(cityId);
     }
 
+>>>>>>> a23a06ae5f94f75c7aa77bcf860da3cdac6d09ba
 }

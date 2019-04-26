@@ -1,4 +1,4 @@
-﻿/** 定义控制器层 */
+﻿﻿/** 定义控制器层 */
 app.controller('userController', function($scope, $timeout, baseService){
 
     // 定义user对象

@@ -67,7 +67,7 @@ app.controller('goodsController', function($scope, $controller, baseService){
     // $scope.$watch: 它可以监控$scope中的变量发生改变，就会调用一个函数
     // $scope.$watch: 监控一级分类id,发生改变，查询二级分类
     $scope.$watch('goods.category1Id', function (newVal, oldVal) {
-        //alert("新值：" + newVal + ",旧值:" + oldVal);
+        alert("新值：" + newVal + ",旧值:" + oldVal);
         if (newVal){ // 不是undefined、null
             // 查询二级分类
             $scope.findItemCatByParentId(newVal, "itemCatList2");
