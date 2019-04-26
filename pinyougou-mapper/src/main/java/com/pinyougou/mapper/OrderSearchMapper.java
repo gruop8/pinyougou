@@ -1,4 +1,7 @@
 package com.pinyougou.mapper;
 
-public interface OrderSearchMapper {
+import com.pinyougou.pojo.Order;
+import tk.mybatis.mapper.common.Mapper;
+
+public interface OrderSearchMapper extends Mapper<Order> {
 }
