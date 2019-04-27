@@ -12,15 +12,16 @@
     <script src="/plugins/angularjs/angular.min.js"></script>
 	<script src="js/base.js"></script>
 	<script src="js/service/baseService.js"></script>
-    <script src="My97DatePicker/WdatePicker.js"></script>
     <script src="js/controller/settingInfoController.js"></script>
+    <link rel="stylesheet" href="plugins/My97DatePicker/skin/WdatePicker.css">
+    <script src="My97DatePicker/WdatePicker.js"></script>
 
 
 </head>
 
 <body 	ng-app="pinyougou"
 		ng-controller="settingInfoController"
-		ng-init="showName();findProvinces();">
+		ng-init="showName();findProvinces();findInfo();">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -153,19 +154,15 @@ $(function(){
 })
 </script>
 
-<script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
 
-<script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
 
-<script type="text/javascript" src="/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
 
-<script type="text/javascript" src="/js/widget/nav.js"></script>
+    <script type="text/javascript" src="/js/widget/nav.js"></script>
 
-<script type="text/javascript" src="/js/plugins/citypicker/distpicker.js"></script>
-
-<script type="text/javascript" src="/js/plugins/upload/uploadPreview.js"></script>
-
-<script type="text/javascript" src="/js/pages/main.js"></script>
+    <script type="text/javascript" src="/js/pages/main.js"></script>
 
 <script>
 	$(function() {               
@@ -226,24 +223,20 @@ $(function(){
                             <li><a href="#two" data-toggle="tab">头像照片</a></li>
                         </ul>
                         <div class="tab-content ">
-							{{user}}{{address}}
+							{{user}}
                             <div id="one" class="tab-pane active">
                                 <form id="form-msg" class="sui-form form-horizontal">
                                     <div class="control-group">
-                                        <label for="inputName" class="control-label">昵称：</label>
+                                        <label for="inputNickName" class="control-label">昵称：</label>
                                         <div class="controls">
-                                            <input type="text" id="inputName" placeholder="昵称" ng-model="user.name">
+                                            <input type="text"  placeholder="昵称" ng-model="user.nickName">
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label for="sex" id="sex" class="control-label">性别：</label>
                                         <div class="controls">
-                                            <label data-toggle="radio" class="radio-pretty inline">
                                             <input type="radio" ng-model="user.sex" name="sex" checked="checked" value="1"><span>男</span>
-                                        </label>
-                                            <label data-toggle="radio" class="radio-pretty inline">
                                             <input type="radio" ng-model="user.sex" name="sex" value="2"><span>女</span>
-                                        </label>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -257,7 +250,8 @@ $(function(){
 											<div data-toggle="distpicker">
 												<div class="form-group area">
 
-													<select ng-model="user.address.provinceId"
+													<select class="form-control" id="provinceId"
+                                                            ng-model="user.address.provinceId"
 															ng-options="i.id as i.province for i in province1.provinces"
 															class="form-control">
 														<option value="">——省——</option>
@@ -265,14 +259,16 @@ $(function(){
 												</div>
 												<div class="form-group area">
 
-													<select ng-model="user.address.cityId"
+													<select class="form-control" id="cityId"
+                                                            ng-model="user.address.cityId"
 															ng-options="i.id as i.city for i in cities1.cities"
 															class="form-control">
 														<option value="">——市——</option>
 													</select>
 												</div>
 												<div class="form-group area">
-													<select ng-model="user.address.areasm"
+													<select class="form-control" id="areaId"
+                                                            ng-model="user.address.areaId"
 															ng-options="i.id as i.area for i in areas1.areas"
 															class="form-control">
 														<option value="">——区——</option>
@@ -310,14 +306,20 @@ $(function(){
 
                                 <div class="new-photo">
                                     <p>当前头像：</p>
-                                    <table class="table table-bordered table-striped">
-                                        <img src="{{picEntity.url}}" width="100" height="100">
-                                        <input type="file" id="file"/>
-										<button class="btn btn-primary" ng-click="upload()" type="button">上传</button>
-
-									</table>
+                                    <div class="upload">
+										<div>
+											<div>
+                                        		<img id="imgShow_WU_FILE_0" width="100" height="100" src="{{user.headpic}}" alt="">
+											</div>
+											<div>
+                                        		<input type="file" id="file"/>
+												<button class="btn btn-primary" type="button" ng-click="upload();">上传</button>
+											</div>
+										</div>
+									</div>
 
                                 </div>
+
                             </div>
                         </div>
 

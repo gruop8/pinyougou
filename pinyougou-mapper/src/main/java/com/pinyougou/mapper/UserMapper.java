@@ -1,5 +1,7 @@
 package com.pinyougou.mapper;
 
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import tk.mybatis.mapper.common.Mapper;
 
 import com.pinyougou.pojo.User;
@@ -13,4 +15,10 @@ public interface UserMapper extends Mapper<User>{
 
 
 
+
+
+    @Select("select nick_name,sex,birthday,address,head_pic from tb_user where username = #{username}")
+    User findByUserId(String username);
+
+    void updateByUsername(User user);
 }
