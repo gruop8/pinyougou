@@ -157,4 +157,77 @@ app.controller('userController', function($scope, $timeout, baseService){
             }
         });
     }
+
+    //修改密码
+    $scope.updateUser = function () {
+        //判断密码是否一致
+        if ($scope.qrPassword && $scope.upPassword == $scope.qrPassword){
+            baseService.sendPost("/user/updateUser?username=" + $scope.username + "&password=" + $scope.upPassword).then(function (response) {
+                if(response.data){
+                    location.href = "http://www.pinyougou.com";
+                }else {
+                    alert("验证码错误");
+                }
+            });
+        }else {
+            alert("密码不一致");
+        }
+    };
+    
+    //查询电话号码
+    $scope.findPhone = function () {
+        baseService.sendGet("/user/findPhone").then(function (response) {
+            $scope.phoneNum = response.data;
+
+        });  
+    };
+
+    //判断验证码
+    $scope.affirmCode = function (code, phone) {
+        baseService.sendPost("/user/affirmCode?code=" + code).then(function (response) {
+            if(response.data){
+                $scope.sendCode(phone);
+            }else {
+                alert("验证码错误");
+                window.location.reload(true);
+            }
+        });
+    };
+
+    //发送短信验证码
+    $scope.sendCode = function (phone) {
+        //发送短信验证码
+        baseService.sendGet("/user/sendSmsCode?phone=" + phone).then(function (response) {
+            if (response.data){
+                // 调用倒计时方法
+                $scope.downcount(90);
+
+            }else{
+                alert("发送失败！");
+                window.location.reload(true);
+            }
+        });
+    };
+
+    //判断短信验证码
+    $scope.messageCode = function (phone, code) {
+        baseService.sendPost("/user/messageCode?phone=" + phone + "&code=" + code).then(function (response) {
+            if(response.data){
+                alert("验证码正确");
+            }else {
+                alert("验证码错误！");
+                window.location.reload(true);
+            }
+        });
+    };
+
+    //修改电话号码
+    $scope.updatePhone = function () {
+        baseService.sendPost("/user/updatePhone?phone=" + $scope.newPhone).then(function (response) {
+            if(!response.data){
+                alert("修改失败");
+                window.location.reload(true);
+            }
+        });
+    };
 });

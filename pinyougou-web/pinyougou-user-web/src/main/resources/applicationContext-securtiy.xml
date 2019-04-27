@@ -16,7 +16,7 @@
     <security:http pattern="/register.html" security="none"/>
     <security:http pattern="/user/save" security="none"/>
     <security:http pattern="/user/sendSmsCode" security="none"/>
-
+    <security:http pattern="/verify" security="none"/>
 
     <!-- 配置哪些URL需要拦截
         entry-point-ref: 认证的入口
@@ -118,6 +118,5 @@
 
     <!-- 配置自定义的用户服务类 -->
     <bean id="userDetailsService" class="com.pinyougou.user.service.UserDetailsServiceImpl"/>
-
 
 </beans>

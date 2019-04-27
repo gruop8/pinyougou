@@ -6,6 +6,7 @@ import com.pinyougou.service.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -173,6 +174,73 @@ public class UserController {
     /** 用户信息修改 */
     @PostMapping("/userUpdate")
     public boolean userUpdate(User user){
+        return false;
+    }
+
+    /** 修改昵称和密码 */
+    @PostMapping("/updateUser")
+    public boolean updateUser(String username, String password){
+        try {
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            userService.updateUser(username, password, name);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /** 判断验证码 */
+    @PostMapping("/affirmCode")
+    public boolean affirmCode(String code, HttpServletRequest request){
+        try {
+            String oldCode = (String)request.getSession()
+                    .getAttribute(VerifyController.VERIFY_CODE);
+            System.out.println("oldCode = " + oldCode);
+            if (code.equalsIgnoreCase(oldCode)){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /** 查询电话号码 */
+    @GetMapping("/findPhone")
+    public String findPhone(){
+        try {
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            return userService.findPhone(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /** 判断短信验证码 */
+    @PostMapping("/messageCode")
+    public boolean messageCode(String phone, String code){
+        try {
+            boolean flag = userService.checkSmsCode(phone, code);
+            return flag;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /** 修改电话号码 */
+    @PostMapping("/updatePhone")
+    public boolean updatePhone(String phone){
+        try {
+            String name = SecurityContextHolder.getContext().getAuthentication().getName();
+            userService.updatePhone(name, phone);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

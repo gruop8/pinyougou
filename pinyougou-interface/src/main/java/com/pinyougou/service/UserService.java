@@ -36,4 +36,13 @@ public interface UserService {
 
 	/** 检验验证码是否正确 */
 	boolean checkSmsCode(String phone, String code);
+
+	/** 修改昵称和密码 */
+    void updateUser(String username, String password, String name);
+
+    /** 查询电话号码 */
+    String findPhone(String name);
+
+    /** 修改电话号码 */
+    void updatePhone(String name, String phone);
 }

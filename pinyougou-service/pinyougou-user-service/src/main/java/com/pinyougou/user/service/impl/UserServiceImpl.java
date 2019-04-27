@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
             params.put("phone", phone);
             params.put("signName", signName);
             params.put("templateCode", templateCode);
-            params.put("templateParam", "{'number' : '"+ code +"'}");
+            params.put("templateParam", "{'code' : '"+ code +"'}");
             // 发送post请求
             String content = httpClientUtils.sendPost(smsUrl, params);
             System.out.println("content = " + content);
@@ -127,6 +127,37 @@ public class UserServiceImpl implements UserService {
             return code.equals(oldCode);
         }catch (Exception ex){
             throw new RuntimeException(ex);
+        }
+    }
+
+    /** 修改密码 */
+    @Override
+    public void updateUser(String username, String password, String name) {
+        try {
+            String pawd = DigestUtils.md5Hex(password);
+            userMapper.updateUser(username, pawd, name);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** 查询电话号码 */
+    @Override
+    public String findPhone(String name) {
+        try {
+            return  userMapper.findPhone(name);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** 修改电话号码 */
+    @Override
+    public void updatePhone(String name, String phone) {
+        try {
+            userMapper.updatePhone(name, phone);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
