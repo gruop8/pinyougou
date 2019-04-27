@@ -179,7 +179,8 @@ app.controller('userController', function($scope, $timeout, baseService){
         if ($scope.qrPassword && $scope.upPassword == $scope.qrPassword){
             baseService.sendPost("/user/updateUser?username=" + $scope.username + "&password=" + $scope.upPassword).then(function (response) {
                 if(response.data){
-                    location.href = "http://www.pinyougou.com";
+                    alert("修改成功");
+                    location.href = "/logout";
                 }else {
                     alert("验证码错误");
                 }
