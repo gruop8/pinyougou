@@ -126,10 +126,17 @@ app.controller('userController', function($scope, $timeout, baseService){
         });
     };
 
-    $scope.saveAddress = function () {
-        baseService.sendPost("user/saveAddress",$scope.address).then(function (response) {
+    $scope.saveOrUpdate = function () {
+        // 请求参数
+        //alert(JSON.stringify($scope.entity));
+        var url = "saveAddress"; // 添加URL
+        // 判断id是否存在
+        if ($scope.address.id){
+            url = "update"; // 修改URL
+        }
+
+        baseService.sendPost("user/" + url,$scope.address).then(function (response) {
             if(response.data){
-                alert("添加成功");
                 location.reload()
             }else {
                 alert("添加失败")
@@ -156,5 +163,11 @@ app.controller('userController', function($scope, $timeout, baseService){
                 alert("修改失败。")
             }
         });
+    }
+    
+    $scope.findAddress = function (id) {
+        baseService.sendGet("/user/findAddress?id="+ id).then(function (response) {
+            $scope.address = response.data;
+        })
     }
 });
