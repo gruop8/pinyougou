@@ -172,7 +172,6 @@ app.controller('userController', function($scope, $timeout, baseService){
     }
 
 
-
     //修改密码
     $scope.updateUser = function () {
         //判断密码是否一致
@@ -210,15 +209,18 @@ app.controller('userController', function($scope, $timeout, baseService){
         });
     };
 
+
     //发送短信验证码
     $scope.sendCode = function (phone) {
         //发送短信验证码
         baseService.sendGet("/user/sendSmsCode?phone=" + phone).then(function (response) {
             if (response.data){
+                $scope.one = true;
                 // 调用倒计时方法
                 $scope.downcount(90);
 
             }else{
+                $scope.one = false;
                 alert("发送失败！");
                 window.location.reload(true);
             }
@@ -243,7 +245,22 @@ app.controller('userController', function($scope, $timeout, baseService){
             if(!response.data){
                 alert("修改失败");
                 window.location.reload(true);
+            }else {
+                $scope.isTiaoz($scope.one, $scope.valueTwo);
             }
         });
+    };
+
+    $scope.one = true;
+    $scope.valueOne = "/home-setting-address-phone.html";
+    $scope.valueTwo = "/home-setting-address-complete.html";
+
+    //判断是否跳转下一页
+    $scope.isTiaoz = function (value, hrf) {
+        if(value){
+            location.href = hrf;
+        }else {
+            window.location.reload(true);
+        }
     };
 });
