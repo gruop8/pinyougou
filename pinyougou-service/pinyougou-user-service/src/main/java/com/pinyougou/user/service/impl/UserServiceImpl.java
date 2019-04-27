@@ -161,4 +161,26 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+    /** 用户信息修改 */
+    @Override
+    public void userUpdate(User user) {
+        try {
+            userMapper.updateByUsername(user);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** 查询用户信息 */
+    @Override
+    public User findInfoByUserId(String username) {
+        try {
+            return userMapper.findByUserId(username);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

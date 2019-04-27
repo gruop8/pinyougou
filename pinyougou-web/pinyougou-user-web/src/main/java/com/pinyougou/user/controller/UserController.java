@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,9 +172,25 @@ public class UserController {
         return false;
     }
 
+    /** 显示个人信息 */
+    @GetMapping("/findInfo")
+    public User findInfo(HttpServletRequest request) {
+        String userId = request.getRemoteUser();
+        return userService.findInfoByUserId(userId);
+    }
+
     /** 用户信息修改 */
     @PostMapping("/userUpdate")
-    public boolean userUpdate(User user){
+    public boolean userUpdate(@RequestBody User user, HttpServletRequest request){
+        try {
+            String username = request.getRemoteUser();
+            user.setBirthday(new Date());
+            user.setUsername(username);
+            userService.userUpdate(user);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return false;
     }
 

@@ -45,4 +45,8 @@ public interface UserService {
 
     /** 修改电话号码 */
     void updatePhone(String name, String phone);
+	/** 用户信息修改 */
+    void userUpdate(User user);
+
+	User findInfoByUserId(String userId);
 }

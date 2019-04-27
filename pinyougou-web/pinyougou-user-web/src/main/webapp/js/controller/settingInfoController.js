@@ -14,9 +14,16 @@ app.controller('settingInfoController', function($scope, baseService){
             });
     };
 
+    /** 显示个人信息 */
+    $scope.findInfo = function () {
+        baseService.sendGet("user/findInfo")
+            .then(function (response) {
+                $scope.user = response.data;
+                $scope.user.address = JSON.parse($scope.user.address);
+            });
+    };
 
-
-    /** 加载完后就立刻加载所有省 */
+    /** 加载完后立刻加载所有省 */
     $scope.findProvinces = function () {
         $scope.user = {};
         baseService.sendGet("user/findProvinces").then(function (response) {
@@ -68,15 +75,12 @@ app.controller('settingInfoController', function($scope, baseService){
     };
 
     /** 图片上传 */
-    $scope.upload = function () {
-        baseService.uploadFile().then(function (response) {
+    $scope.uploadFile = function () {
+        baseService.uploadFile().then(function(response){
             if(response.data.status == 200){
-
-                $scope.picEntity.url = response.data.url;
-
-            }
-            else {
-                alert("上传失败");
+                $scope.user.headPic= response.data.url;
+            }else{
+                alert("上传失败！");
             }
         });
     };
