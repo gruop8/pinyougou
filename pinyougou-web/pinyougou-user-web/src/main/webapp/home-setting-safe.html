@@ -401,7 +401,7 @@ $(function(){
                                         </div>
                                         <div class="controls">
                                             <button  ng-click="messageCode(phoneNum, msgcode);" class="sui-btn btn-info">发送</button>
-											<button class="sui-btn btn-info" disabled="disabled">{{smsTip}}</button>
+											<button class="sui-btn btn-info" ng-click="messageCode(newPhone, msgcode);" disabled="disabled">{{smsTip}}</button>
                                         </div>
                                     </div>
                                     <div class="control-group next-btn">
