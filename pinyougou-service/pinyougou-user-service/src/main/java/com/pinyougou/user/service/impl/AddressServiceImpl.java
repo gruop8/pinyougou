@@ -37,7 +37,11 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void update(Address address) {
-
+        try {
+            addressMapper.updateByPrimaryKeySelective(address);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -56,7 +60,11 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address findOne(Serializable id) {
-        return null;
+        try {
+            return addressMapper.selectByPrimaryKey(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -193,4 +193,20 @@ public class UserController {
         }
         return false;
     }
+
+    @GetMapping("/findAddress")
+    public Address findAddressById(Long id){
+        return addressService.findOne(id);
+    }
+
+    @PostMapping("/update")
+    public boolean update(@RequestBody Address address){
+        try {
+            addressService.update(address);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
