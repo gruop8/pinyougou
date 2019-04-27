@@ -251,7 +251,7 @@ app.controller('userController', function($scope, $timeout, baseService){
         });
     };
 
-    $scope.one = true;
+    $scope.one = false;
     $scope.valueOne = "/home-setting-address-phone.html";
     $scope.valueTwo = "/home-setting-address-complete.html";
 
